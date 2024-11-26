@@ -1,33 +1,29 @@
-function Drawer() {
-  return (<div style={{display: "none"}} className="overlay">
+function Drawer({onClickCart, items = [], onRemove}) {
+  return (<div className="overlay">
     <div className="drawer">
       <h2 className="mb-30">
         Корзина{" "}
-        <img className="removeBtn" src="/img/btn-remove.svg" alt="remove" />
+        <img onClick={onClickCart} className="removeBtn" src="/img/btn-remove.svg" alt="remove" />
       </h2>
       <div className="items">
-        <div className="cartItem d-flex align-center mb-20">
-          <div
-            style={{ backgroundImage: "url(/img/sneakers/image1.jpg)" }}
-            className="cartItemImg"
-          ></div>
-          <div className="mr-20 flex">
-            <p className="mb-5">Мужские Кроссовки Nike Air Max 27012 </p>
-            <b>12 999 руб.</b>
-          </div>
-          <img className="removeBtn" src="/img/btn-remove.svg" alt="remove" />
-        </div>
-        <div className="cartItem d-flex align-center mb-20">
-          <div
-            style={{ backgroundImage: "url(/img/sneakers/image2.jpg)" }}
-            className="cartItemImg"
-          ></div>
-          <div className="mr-20 flex">
-            <p className="mb-5">Мужские Кроссовки Nike Air Max 27012 </p>
-            <b>12 999 руб.</b>
-          </div>
-          <img className="removeBtn" src="/img/btn-remove.svg" alt="remove" />
-        </div>
+
+        {
+              items.map((item) => (
+                <>
+                  <div className="cartItem d-flex align-center mb-20">
+                    <div
+                      style={{ backgroundImage: `url(${item.imageUrl})` }}
+                      className="cartItemImg"
+                    ></div>
+                    <div className="mr-20 flex">
+                      <p className="mb-5">{item.title}</p>
+                      <b>{item.price} руб.</b>
+                    </div>
+                    <img onClick={() => onRemove(item.id)} className="removeBtn" src="/img/btn-remove.svg" alt="remove" />
+                </div>
+                </>  ))
+        }
+     
       </div>
       <div className="cartTotalBlock">
         <ul>
